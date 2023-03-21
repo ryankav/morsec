@@ -1,6 +1,20 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+pub enum MorseChar {
+  Dit,
+  Dah
+};
+
+pub struct Morsec {
+
+};
+
+
+impl Morsec {
+  fn new() -> Self {
+    todo!();
+  }
 }
+
+struct MorseIter {};
 
 #[cfg(test)]
 mod tests {
