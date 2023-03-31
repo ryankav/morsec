@@ -1,15 +1,19 @@
-pub enum MorseChar {
+enum MorseChar {
   Dit,
   Dah
 };
 
-pub struct Morsec {
+pub struct Morsec<'input> {
 
 };
 
 
-impl Morsec {
+impl <'input> Morsec<'input> {
   fn new() -> Self {
+    todo!();
+  }
+
+  fn input(&mut self, in: &str) {
     todo!();
   }
 }
