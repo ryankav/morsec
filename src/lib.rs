@@ -4,7 +4,8 @@ enum MorseChar {
 };
 
 pub struct Morsec<'input> {
-
+    data: Option<&'input str>, // TODO: convert this into an appropriate iterator owned by the struct
+    toggle: Option<fn>, // TODO: make this have the appropriate traits
 };
 
 
