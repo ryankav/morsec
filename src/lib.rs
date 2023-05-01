@@ -1,4 +1,8 @@
-enum MorseChar {
+use std::slice::Iter;
+
+mod conversion;
+
+pub enum MorseChar {
   Dit,
   Dah
 };
@@ -18,6 +22,10 @@ impl <'input> Morsec<'input> {
     todo!();
   }
 }
+
+pub const fn convert_char(input: char) -> Iter<'static, MorseChar> {
+
+} 
 
 struct MorseIter {};
 
