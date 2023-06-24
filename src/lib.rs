@@ -1,41 +1,33 @@
 use std::slice::Iter;
 
 mod conversion;
+use conversion::*;
 
+#[derive(Clone, Copy, Debug)]
 pub enum MorseChar {
-  Dit,
-  Dah
-};
+    Dit,
+    Dah,
+}
 
 pub struct Morsec<'input> {
-    data: Option<&'input str>, // TODO: convert this into an appropriate iterator owned by the struct
-    toggle: Option<fn>, // TODO: make this have the appropriate traits
-};
+    _data: Option<&'input str>, // TODO: convert this into an appropriate iterator owned by the struct
+    _toggle: Option<fn()>,      // TODO: make this have the appropriate traits
+}
 
+impl<'input> Morsec<'input> {
+    fn new() -> Self {
+        todo!();
+    }
 
-impl <'input> Morsec<'input> {
-  fn new() -> Self {
-    todo!();
-  }
-
-  fn input(&mut self, in: &str) {
-    todo!();
-  }
+    fn input(&mut self, input: &str) {
+        todo!();
+    }
 }
 
 pub const fn convert_char(input: char) -> Iter<'static, MorseChar> {
-
-} 
-
-struct MorseIter {};
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+    match input {
+        _ => unimplemented!(),
     }
 }
+
+struct MorseIter {}
