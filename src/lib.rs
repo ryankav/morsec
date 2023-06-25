@@ -24,8 +24,34 @@ impl<'input> Morsec<'input> {
     }
 }
 
-pub const fn convert_char(input: char) -> Iter<'static, MorseChar> {
+pub fn convert_char(input: char) -> Iter<'static, MorseChar> {
     match input {
+        'A' => A.iter(),
+        'B' => B.iter(),
+        'C' => C.iter(),
+        'D' => D.iter(),
+        'E' => E.iter(),
+        'F' => F.iter(),
+        'G' => G.iter(),
+        'H' => H.iter(),
+        'I' => I.iter(),
+        'J' => J.iter(),
+        'K' => K.iter(),
+        'L' => L.iter(),
+        'M' => M.iter(),
+        'N' => N.iter(),
+        'O' => O.iter(),
+        'P' => P.iter(),
+        'Q' => Q.iter(),
+        'R' => R.iter(),
+        'S' => S.iter(),
+        'T' => T.iter(),
+        'U' => U.iter(),
+        'V' => V.iter(),
+        'W' => W.iter(),
+        'X' => X.iter(),
+        'Y' => Y.iter(),
+        'Z' => Z.iter(),
         _ => unimplemented!(),
     }
 }

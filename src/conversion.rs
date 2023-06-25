@@ -1,6 +1,6 @@
 use super::MorseChar;
 
-pub const A: &[MorseChar] = &[MorseChar::Dit, MorseChar::Dah];
+pub const A: [MorseChar; 2] = [MorseChar::Dit, MorseChar::Dah];
 pub const B: [MorseChar; 4] = [
     MorseChar::Dah,
     MorseChar::Dit,
@@ -68,6 +68,12 @@ pub const V: [MorseChar; 4] = [
     MorseChar::Dah,
 ];
 pub const W: [MorseChar; 3] = [MorseChar::Dit, MorseChar::Dah, MorseChar::Dah];
+pub const X: [MorseChar; 4] = [
+    MorseChar::Dah,
+    MorseChar::Dit,
+    MorseChar::Dit,
+    MorseChar::Dah,
+];
 pub const Y: [MorseChar; 4] = [
     MorseChar::Dah,
     MorseChar::Dit,
