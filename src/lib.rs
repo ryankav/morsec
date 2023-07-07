@@ -1,30 +1,57 @@
 use std::slice::Iter;
+use std::str::Chars;
+use std::time::Duration;
 
 mod conversion;
 use conversion::*;
 
 #[derive(Clone, Copy, Debug)]
-pub enum MorseChar {
+pub(crate) enum MorseChar {
     Dit,
     Dah,
 }
 
-pub struct Morsec<'input> {
-    _data: Option<&'input str>, // TODO: convert this into an appropriate iterator owned by the struct
-    _toggle: Option<fn()>,      // TODO: make this have the appropriate traits
+pub struct Morsec<'input, F: FnMut()> {
+    /// The message that is to be transmitted via Morse code, it is required
+    /// that the message be one of the 26 basic Latin characters or a space
+    message: Chars<'input>,
+
+    /// As Morse code transmits messages through toggling on and off some
+    /// medium, the toggle function here provides a way to allow the Morsec
+    /// struct to cause the desired side effect
+    toggle: F,
+
+    /// Morsec's dit_duration member controls the time length that a dit lasts
+    /// for. This is the fundamental time unit in Morse code, as all other
+    /// durations are defined of it a dah for example being 3 times as long as
+    /// a dit, a space between characters being transmitted is the same as a
+    /// dit and the space between words is 7 times that of a dit.
+    dit_duration: Duration,
 }
 
-impl<'input> Morsec<'input> {
-    fn new() -> Self {
-        todo!();
+impl<'input, F: FnMut()> Morsec<'input, F> {
+    /// Creates a new Morsec struct from the input message and the toggle
+    /// function. The initial dit_duration is defaulted to be 0.5s
+    pub fn new(message: &'input str, toggle: F) -> Self {
+        Self {
+            message: message.chars(),
+            toggle,
+            dit_duration: Duration::from_millis(500),
+        }
     }
 
-    fn input(&mut self, input: &str) {
-        todo!();
+    pub fn set_space_duration(&mut self, duration: Duration) {
+        self.dit_duration = duration;
+    }
+
+    /// Transmit will send the message that was given to the struct and in the
+    /// process consume the struct
+    pub fn transmit(self) {
+        todo!("implement the actual iteration and sending of the message");
     }
 }
 
-pub fn convert_char(input: char) -> Iter<'static, MorseChar> {
+fn convert_char(input: char) -> Iter<'static, MorseChar> {
     match input {
         'a' | 'A' => A.iter(),
         'b' | 'B' => B.iter(),
@@ -55,5 +82,3 @@ pub fn convert_char(input: char) -> Iter<'static, MorseChar> {
         _ => unimplemented!(),
     }
 }
-
-struct MorseIter {}
