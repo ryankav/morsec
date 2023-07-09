@@ -1,5 +1,6 @@
 use std::slice::Iter;
-use std::str::Chars;
+use std::str::SplitWhitespace;
+use std::thread::sleep;
 use std::time::Duration;
 
 mod conversion;
@@ -14,7 +15,7 @@ pub(crate) enum MorseChar {
 pub struct Morsec<'input, F: FnMut()> {
     /// The message that is to be transmitted via Morse code, it is required
     /// that the message be one of the 26 basic Latin characters or a space
-    message: Chars<'input>,
+    message: SplitWhitespace<'input>,
 
     /// As Morse code transmits messages through toggling on and off some
     /// medium, the toggle function here provides a way to allow the Morsec
@@ -34,7 +35,7 @@ impl<'input, F: FnMut()> Morsec<'input, F> {
     /// function. The initial dit_duration is defaulted to be 0.5s
     pub fn new(message: &'input str, toggle: F) -> Self {
         Self {
-            message: message.chars(),
+            message: message.split_whitespace(),
             toggle,
             dit_duration: Duration::from_millis(500),
         }
@@ -46,8 +47,26 @@ impl<'input, F: FnMut()> Morsec<'input, F> {
 
     /// Transmit will send the message that was given to the struct and in the
     /// process consume the struct
-    pub fn transmit(self) {
-        todo!("implement the actual iteration and sending of the message");
+    pub fn transmit(mut self) {
+        for word in self.message {
+            for letter in word.chars() {
+                for symbol in convert_char(letter) {
+                    (self.toggle)();
+                    match symbol {
+                        MorseChar::Dit => sleep(self.dit_duration),
+                        MorseChar::Dah => sleep(3 * self.dit_duration),
+                    };
+                    (self.toggle)();
+                    // Sleep between the encoded characters
+                    sleep(self.dit_duration);
+                }
+                // sleep between letters in the words cumulative needs to be 3x
+                // the dit duration
+                sleep(2 * self.dit_duration);
+            }
+            // Sleep so the time between words is cumulative 7x dit duration
+            sleep(4 * self.dit_duration);
+        }
     }
 }
 
