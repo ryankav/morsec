@@ -59,7 +59,7 @@ impl<'input, T: MorsecTransmitter> Morsec<'input, T> {
     pub fn transmit(mut self) {
         for word in self.message {
             for letter in word.chars() {
-                for symbol in convert_char(letter) {
+                for symbol in Self::convert_char(letter) {
                     self.transmitter.toggle();
                     match symbol {
                         MorseChar::Dit => self.transmitter.sleep(T::DIT_DURATION),
@@ -77,36 +77,36 @@ impl<'input, T: MorsecTransmitter> Morsec<'input, T> {
             self.transmitter.sleep(4 * T::DIT_DURATION);
         }
     }
-}
 
-fn convert_char(input: char) -> Iter<'static, MorseChar> {
-    match input {
-        'a' | 'A' => A.iter(),
-        'b' | 'B' => B.iter(),
-        'c' | 'C' => C.iter(),
-        'd' | 'D' => D.iter(),
-        'e' | 'E' => E.iter(),
-        'f' | 'F' => F.iter(),
-        'g' | 'G' => G.iter(),
-        'h' | 'H' => H.iter(),
-        'i' | 'I' => I.iter(),
-        'j' | 'J' => J.iter(),
-        'k' | 'K' => K.iter(),
-        'l' | 'L' => L.iter(),
-        'm' | 'M' => M.iter(),
-        'n' | 'N' => N.iter(),
-        'o' | 'O' => O.iter(),
-        'p' | 'P' => P.iter(),
-        'q' | 'Q' => Q.iter(),
-        'r' | 'R' => R.iter(),
-        's' | 'S' => S.iter(),
-        't' | 'T' => T.iter(),
-        'u' | 'U' => U.iter(),
-        'v' | 'V' => V.iter(),
-        'w' | 'W' => W.iter(),
-        'x' | 'X' => X.iter(),
-        'y' | 'Y' => Y.iter(),
-        'z' | 'Z' => Z.iter(),
-        _ => unimplemented!(),
+    fn convert_char(input: char) -> Iter<'static, MorseChar> {
+        match input {
+            'a' | 'A' => A.iter(),
+            'b' | 'B' => B.iter(),
+            'c' | 'C' => C.iter(),
+            'd' | 'D' => D.iter(),
+            'e' | 'E' => E.iter(),
+            'f' | 'F' => F.iter(),
+            'g' | 'G' => G.iter(),
+            'h' | 'H' => H.iter(),
+            'i' | 'I' => I.iter(),
+            'j' | 'J' => J.iter(),
+            'k' | 'K' => K.iter(),
+            'l' | 'L' => L.iter(),
+            'm' | 'M' => M.iter(),
+            'n' | 'N' => N.iter(),
+            'o' | 'O' => O.iter(),
+            'p' | 'P' => P.iter(),
+            'q' | 'Q' => Q.iter(),
+            'r' | 'R' => R.iter(),
+            's' | 'S' => S.iter(),
+            't' | 'T' => T.iter(),
+            'u' | 'U' => U.iter(),
+            'v' | 'V' => V.iter(),
+            'w' | 'W' => W.iter(),
+            'x' | 'X' => X.iter(),
+            'y' | 'Y' => Y.iter(),
+            'z' | 'Z' => Z.iter(),
+            _ => unimplemented!(),
+        }
     }
 }
