@@ -2,12 +2,12 @@ use morsec::{Morsec, MorsecTransmitter};
 use std::time::Duration;
 
 #[derive(Default)]
-struct SosTest {
+struct MorseTest {
     morse_chars: Vec<u64>,
     sleep_time: Vec<u64>,
 }
 
-impl<'a> MorsecTransmitter for &'a mut SosTest {
+impl<'a> MorsecTransmitter for &'a mut MorseTest {
     const DIT_DURATION: Duration = Duration::from_secs(1);
 
     fn sleep(&mut self, duration: Duration) {
@@ -33,10 +33,30 @@ impl<'a> MorsecTransmitter for &'a mut SosTest {
 
 #[test]
 fn test_sos() {
-    let mut transmitter = SosTest::default();
+    let mut transmitter = MorseTest::default();
     let tester = Morsec::new("sos", &mut transmitter);
-
     tester.transmit();
-
     assert_eq!(transmitter.morse_chars, [1, 1, 1, 3, 3, 3, 1, 1, 1]);
+    assert_eq!(transmitter.sleep_time, [1, 1, 3, 1, 1, 3, 1, 1, 7]);
+}
+
+#[test]
+fn test_blah() {
+    let mut transmitter = MorseTest::default();
+    let tester = Morsec::new("hello world", &mut transmitter);
+    tester.transmit();
+    assert_eq!(
+        transmitter.morse_chars,
+        [
+            1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 3, 1, 1, 3, 3, 3, 1, 3, 3, 3, 3, 3, 1, 3, 1, 1, 3, 1, 1,
+            3, 1, 1
+        ]
+    );
+    assert_eq!(
+        transmitter.sleep_time,
+        [
+            1, 1, 1, 3, 3, 1, 1, 1, 3, 1, 1, 1, 3, 1, 1, 7, 1, 1, 3, 1, 1, 3, 1, 1, 3, 1, 1, 1, 3,
+            1, 1, 7
+        ]
+    );
 }
