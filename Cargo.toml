@@ -1,7 +1,15 @@
 [package]
 name = "morsec"
 version = "0.1.0"
+authors = ["Ryan Kavanagh <ryan.p.kav@gmail.com>"]
 edition = "2021"
+description = "A library to handle transmitting Morse code messages"
+license = "MIT"
+keywords = ["morse code", "morse", "transmit"]
+categories = ["transmitting"]
+homepage = "https://github.com/ryankav/morsec"
+repository = "https://github.com/ryankav/morsec"
+readme = "https://github.com/ryankav/morsec/blob/main/README.md"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
