@@ -41,7 +41,7 @@ fn test_sos() {
 }
 
 #[test]
-fn test_blah() {
+fn test_sentence() {
     let mut transmitter = MorseTest::default();
     let tester = Morsec::new("hello world", &mut transmitter);
     tester.transmit();
