@@ -1,14 +1,24 @@
+use core::clone::Clone;
+use core::marker::Copy;
 use core::slice::Iter;
 use core::str::SplitWhitespace;
 use core::time::Duration;
+use core::unimplemented;
 
 mod conversion;
 use conversion::*;
 
-#[derive(Clone, Copy, Debug)]
 pub(crate) enum MorseChar {
     Dit,
     Dah,
+}
+
+impl Copy for MorseChar {}
+
+impl Clone for MorseChar {
+    fn clone(&self) -> Self {
+        *self
+    }
 }
 
 pub struct Morsec<'input, T: MorsecTransmitter> {

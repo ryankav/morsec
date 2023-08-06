@@ -1,6 +1,6 @@
 [package]
 name = "morsec"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Ryan Kavanagh <ryan.p.kav@gmail.com>"]
 edition = "2021"
 description = "A library to handle transmitting Morse code messages"
