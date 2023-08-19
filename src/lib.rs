@@ -1,9 +1,11 @@
-use core::clone::Clone;
-use core::marker::Copy;
-use core::slice::Iter;
-use core::str::SplitWhitespace;
-use core::time::Duration;
-use core::unimplemented;
+#![cfg_attr(not(feature = "std"), no_std)]
+
+#[cfg(not(feature = "std"))]
+use core::{
+    clone::Clone, marker::Copy, slice::Iter, str::SplitWhitespace, time::Duration, unimplemented,
+};
+#[cfg(feature = "std")]
+pub use std::{slice::Iter, str::SplitWhitespace, time::Duration};
 
 mod conversion;
 use conversion::*;
